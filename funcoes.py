@@ -87,7 +87,23 @@ def verificar_resposta(questao_atual: dict, escolha: str) -> bool:
 
     return questao_atual["respostas"][indice] == questao_atual["resposta_certa"]
 
+def formatar_resolucao(questao_atual: dict) -> str:
+    """
+    Esta função recebe o dicionário da questão e retorna a resposta correta juntamente com a resolução matemática, formatada em uma única string.
+    
+    Args:
+        questao_atual (dict) = Dicionário contendo pergunta e respostas, bem como resposta certa e resolução.
+    
+    Returns:
+        str = Texto formatado com gabarito e o passo a passo da resolução.
 
+    """
+    texto_resolucao = (
+        f"Resposta Correta: {questao_atual["resposta_certa"]}\n\n"
+        f"Resolução:\n{questao_atual["resolucao"]}"
+    )
+
+    return texto_resolucao
 
 def mostrar_instrucao() -> str:
     """
