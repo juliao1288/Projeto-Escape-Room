@@ -1,4 +1,5 @@
 import funcoes
+import time
 
 
 def main():
@@ -18,17 +19,40 @@ def main():
         match opcao:
             case "1":
                 funcoes.limpar_terminal()
-                banco_questoes = funcoes.carregar_questoes("fase1_facil.csv")
-                questao_atual = funcoes.sortear_questao(banco_questoes)
-
-                print("="*20, "FASE 1", "="*20)
-                print(funcoes.formatar_questao(questao_atual))
-                escolha = input(" Insira sua resposta: ").upper()
-                if funcoes.verificar_resposta(questao_atual, escolha):
-                    print(" Parabéns, vc acertou.")
-                    funcoes.limpar_terminal()
-                else:
-                    print(" Que pena, vc errou.")
+                arquivos = ["fase1_facil.csv", "fase2_basico.csv", "fase3_intermediario.csv", "fase4_avancado.csv", "fase5_dificil.csv"]
+                acertos_necessarios = [1, 2, 2, 3, 4]
+                acertos = 0
+                fase = 0
+                banco_questoes = funcoes.carregar_questoes(arquivos[fase])
+                while True:
+                    if acertos < acertos_necessarios[fase]:
+                        print("="*20, f"FASE {fase+1}", "="*20)
+                        
+                        questao_atual = funcoes.sortear_questao(banco_questoes)
+                        print(funcoes.formatar_questao(questao_atual))
+                        escolha = input(" Insira sua resposta: ").upper()
+                        if funcoes.verificar_resposta(questao_atual, escolha):
+                            print(" Parabéns, vc acertou.")
+                            acertos += 1
+                            print(len(banco_questoes))
+                            input("\n Pressione a tecla 'enter' para continuar:  ")
+                            funcoes.limpar_terminal()
+                        else:
+                            print(" Que pena, vc errou.")
+                            print(len(banco_questoes))
+                            print(funcoes.formatar_resolucao(questao_atual))
+                            comando = input("\n Pressione a tecla 'enter' para continuar:  ")
+                            if comando.join(" "):
+                                funcoes.limpar_terminal()
+                    else:
+                        if fase == 4:
+                            print(" Parabéns, vc chegou ao final do jogo!!")
+                            break
+                        else:
+                            print(" Parabéns, você acertou a quantidade necessária e passou de fase.")
+                            acertos = 0
+                            fase += 1
+                            banco_questoes = funcoes.carregar_questoes(arquivos[fase])
 
 
                 
