@@ -128,7 +128,7 @@ def mostrar_instrucao() -> str:
         "• Errou? Você mantém seus acertos atuais, mas recebe uma nova questão"
         " do mesmo nível.\n"
         "• As questões não se repetem enquanto houver desafios inéditos.\n"
-        "• Fique atento ao tempo e ao limite máximo de erros: se esgotarem, é"
+        "• Fique atento à suas vidas, você começa com 5: se esgotarem, é"
         " Fim de Jogo!"
     )
     return instrucoes
